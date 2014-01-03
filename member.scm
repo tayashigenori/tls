@@ -5,4 +5,4 @@
       (else (or (eq? (car lat) a)
                 (member? a (cdr lat)))))))
 
-(member? `meat `(potatoes and meat gravy))
+(member? `meat `(mushed potatoes and meat gravy))
