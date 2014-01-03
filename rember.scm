@@ -6,4 +6,5 @@
               ((eq? (car lat) a) (cdr lat))
               (else (rember a (cdr lat))))))))
 
-(rember `bacon `(bacon lettuce and tomato))
+(rember `and `(bacon lettuce and tomato))
+; this returns unexpected result `(tomato)
