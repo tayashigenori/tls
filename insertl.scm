@@ -4,8 +4,7 @@
       ((null? lat) (quote ()))
       (else (cond
               ((eq? (car lat) old)
-               (cons new
-                     (cons old (cdr lat))))
+               (cons new lat))
               (else (cons (car lat)
                           (insertL new old
                                    (cdr lat)))))))))
