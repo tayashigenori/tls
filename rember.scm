@@ -6,4 +6,4 @@
       (else (cons (car lat)
                   (rember a (cdr lat)))))))
 
-(rember `and `(bacon lettuce and tomato))
+(rember `sauce `(soy sauce and tomato sauce))
