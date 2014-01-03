@@ -8,10 +8,9 @@
           (cons new
                 (cons old
                       (multiinsertL new old
-                                    lat))))
+                                    (cdr lat)))))
          (else (cons (car lat)
                      (multiinsertL new old
                                    (cdr lat)))))))))
 
 (multiinsertL `fried `fish `(chips and fish or fish and fried))
-; don't run this script, this never ends
