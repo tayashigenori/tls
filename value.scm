@@ -1,17 +1,22 @@
 (load "./common/atom.scm")
+(load "./o+.scm")
+(load "./omultiply.scm")
+(load "./oexpt.scm")
 
 (define value
   (lambda (nexp)
     (cond
-      ((atom? nexp) ... )
+      ((atom? nexp) nexp)
       ((eq? (car (cdr nexp)) (quote o+))
-       ...)
+       (o+ (value (car nexp))
+           (value (car (cdr (cdr nexp))))))
       ((eq? (car (cdr nexp)) (quote omultiply))
-       ...)
-      (else ...))))
+       (omultiply (value (car nexp))
+                  (value (car (cdr (cdr nexp))))))
+      (else
+       (oexpt (value (car nexp))
+              (value (car (cdr (cdr nexp)))))))))
 
-
-; stub
 
 ; > (value 13)
 ; 13
