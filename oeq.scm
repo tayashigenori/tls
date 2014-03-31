@@ -1,8 +1,10 @@
 (load "./common/sub1.scm")
+(load "./ogt.scm")
+(load "./olt.scm")
 
 (define oeq
   (lambda (n m)
     (cond
-      ((zero? m) (zero? n))
-      ((zero? n) #f)
-      (else (oeq (sub1 n) (sub1 m))))))
+      ((ogt n m) #f)
+      ((olt n m) #f)
+      (else #t))))
