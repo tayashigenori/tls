@@ -1,9 +1,18 @@
+(load "./oequal.scm")
+
 (define rember
-  (lambda (a lat)
+  (lambda (s l)
     (cond
-      ((null? lat) (quote ()))
-      ((eq? (car lat) a) (cdr lat))
-      (else (cons (car lat)
-                  (rember a (cdr lat)))))))
+      ((null? l) (quote ()))
+      ((atom? (car l))
+       (cond
+         ((equal? (car l) s) (cdr l))
+         (else (cons (car l)
+                     (rember s (cdr l))))))
+      (else (cond
+              ((oequal? (car l) s) (cdr l))
+              (else (cons (car l)
+                          (rember s
+                                  (cdr l)))))))))
 
 (rember `sauce `(soy sauce and tomato sauce))
