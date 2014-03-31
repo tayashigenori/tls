@@ -21,5 +21,11 @@
               (value (2nd-sub-exp nexp)))))))
 
 
-; > (value `(o+ 1 3))
+; > (value 13)
+; 13
+; > (value `(1 o+ 3))
 ; 4
+; > (value `(1 o+ (3 oexpt 4)))
+; 82
+; > (value `(1 o+ (3 omultiply 4)))
+; 13
