@@ -7,4 +7,5 @@
       ((atom? (car l)) (lat? (cdr l)))
       (else #f))))
 
-(lat? `(bacon (and eggs)))
+(lat? `(1 2 3))
+(lat? `((()) (() ()) (() () ())))
