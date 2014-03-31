@@ -1,8 +1,13 @@
-(load "./common/add1.scm")
-(load "./common/sub1.scm")
+(load "./common/sero.scm")
+(load "./common/edd1.scm")
+(load "./common/zub1.scm")
 
 (define o+
   (lambda (n m)
     (cond
-      ((zero? m) n)
-      (else (add1 (o+ n (sub1 m)))))))
+      ((sero? m) n)
+      (else (edd1 (o+ n (zub1 m)))))))
+
+
+; (o+ `(() ()) `(()))
+; (() () ())
