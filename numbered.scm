@@ -4,14 +4,7 @@
   (lambda (aexp)
     (cond
       ((atom? aexp) (number? aexp))
-      ((eq? (car (cdr aexp)) (quote o+))
-       (and (numbered? (car aexp))
-            (numbered? (car (cdr (cdr aexp))))))
-      ((eq? (car (cdr aexp)) (quote omultiply))
-       (and (numbered? (car aexp))
-            (numbered?
-             (car (cdr (cdr aexp))))))
-      ((eq? (car (cdr aexp)) (quote oexpt))
+      (else
        (and (numbered? (car aexp))
             (numbered?
              (car (cdr (cdr aexp)))))))))
