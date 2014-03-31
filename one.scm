@@ -2,5 +2,4 @@
 
 (define one?
   (lambda (n)
-    (cond
-      (else (oeq n 1)))))
+    (oeq n 1)))
