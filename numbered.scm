@@ -1,9 +1,15 @@
+(load "./common/atom.scm")
+
 (define numbered?
   (lambda (aexp)
     (cond
-      (___ ___)
-      (___ ___)
-      (___ ___))))
+      ((atom? aexp) (number? aexp))
+      ((eq? (car (cdr aexp)) (quote o+))
+       ... )
+      ((eq? (car (cdr aexp)) (quote omultiply))
+       ... )
+      ((eq? (car (cdr aexp)) (quote oexpt))
+       ... ))))
 
 
 ; stub
