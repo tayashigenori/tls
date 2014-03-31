@@ -7,22 +7,16 @@
   (lambda (nexp)
     (cond
       ((atom? nexp) nexp)
-      ((eq? (car (cdr nexp)) (quote o+))
-       (o+ (value (car nexp))
-           (value (car (cdr (cdr nexp))))))
-      ((eq? (car (cdr nexp)) (quote omultiply))
-       (omultiply (value (car nexp))
-                  (value (car (cdr (cdr nexp))))))
+      ((eq? (car nexp) (quote o+))
+       (o+ (value (cdr nexp))
+           (value (cdr (cdr nexp)))))
+      ((eq? (car nexp) (quote omultiply))
+       (omultiply (value (cdr nexp))
+                  (value (cdr (cdr nexp)))))
       (else
-       (oexpt (value (car nexp))
-              (value (car (cdr (cdr nexp)))))))))
+       (oexpt (value (cdr nexp))
+              (value (cdr (cdr nexp))))))))
 
 
-; > (value 13)
-; 13
-; > (value `(1 o+ 3))
-; 4
-; > (value `(1 o+ (3 oexpt 4)))
-; 82
-; > (value `(1 o+ (3 omultiply 4)))
-; 13
+; > (value `(o+ 1 3))
+; returns error "mcar: expects argument of type <mutable-pair>; given ()"
