@@ -4,11 +4,8 @@
   (lambda (lat)
     (cond
       ((null? lat) #t)
-      (else
-       (cond
-         ((member? (car lat) (cdr lat))
-          #f)
-         (else (set? (cdr lat))))))))
+      ((member? (car lat) (cdr lat)) #f)
+      (else (set? (cdr lat))))))
 
 ; > (set? `(apple peaches apple plum))
 ; #f
@@ -16,3 +13,5 @@
 ; #t
 ; > (set? `())
 ; #t
+; > (set? `(apple 3 pear 4 9 apple 3 4))
+; #f
