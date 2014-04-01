@@ -5,4 +5,5 @@
       (else (or (eq? (car lat) a)
                 (member? a (cdr lat)))))))
 
-(member? `liver `(bagels and lox))
+; (member? `liver `(bagels and lox))
+; #f
