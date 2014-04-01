@@ -10,4 +10,5 @@
                      (multirember a
                                   (cdr lat)))))))))
 
-(multirember `cup `(coffee cup tea cup and hick cup))
+; > (multirember `cup `(coffee cup tea cup and hick cup))
+; (coffee tea and hick)
