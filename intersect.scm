@@ -4,9 +4,9 @@
   (lambda (set1 set2)
     (cond
       ((null? set1) #f)
-      ((member? (car set1) set2) #t)
-      (else (intersect?
-             (cdr set1) set2)))))
+      (else (or (member? (car set1) set2)
+                (intersect?
+                 (cdr set1) set2))))))
 
 
 ; > (intersect? `(stewed tomatoes and macaroni) `(macaroni and cheese))
