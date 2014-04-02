@@ -1,11 +1,14 @@
+(load "./build.scm")
+(load "./first.scm")
+(load "./second.scm")
+
 (define revrel
   (lambda (rel)
     (cond
       ((null? rel) (quote ()))
-      (else (cons (cons
-                   (car (cdr (car rel)))
-                   (cons (car (car rel))
-                         (quote ())))
+      (else (cons (build
+                   (second (car rel))
+                   (first (car rel)))
                   (revrel (cdr rel)))))))
 
 
