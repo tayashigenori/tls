@@ -4,11 +4,10 @@
   (lambda (test? a l)
     (cond
       ((null? l) (quote ()))
-      (else (cond
-              ((test? (car l) a) (cdr l))
-              (else (cons (car l)
-                          (rember-f test? a
-                                    (cdr l)))))))))
+      ((test? (car l) a) (cdr l))
+      (else (cons (car l)
+                  (rember-f test? a
+                            (cdr l)))))))
 
 
 ; > (rember-f = 5 `(6 2 5 3))
