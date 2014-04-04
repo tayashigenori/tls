@@ -1,11 +1,10 @@
-(load "./oequal.scm")
+(load "./insert-g.scm")
+(load "./seqrem.scm")
 
 (define rember
-  (lambda (s l)
-    (cond
-      ((null? l) (quote ()))
-      ((oequal? (car l) s) (cdr l))
-      (else (cons (car l)
-                  (rember s (cdr l)))))))
+  (lambda (a l)
+    ((insert-g seqrem) #f a l)))
 
-(rember `sauce `(soy sauce and tomato sauce))
+
+; > (rember `sausage `(pizza with sausage and bacon))
+; (pizza with and bacon)
