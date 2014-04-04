@@ -1,4 +1,4 @@
-(load "a-friend.scm")
+(load "last-friend.scm")
 
 (define multirember&co
   (lambda (a lat col)
@@ -19,12 +19,5 @@
                               seen)))))))
 
 
-; > (multirember&co `tuna `(strawberries tuna and swordfish) a-friend)
-; #f
-; > (multirember&co `tuna `() a-friend)
-; #t
-; > (multirember&co `tuna `(tuna) a-friend)
-; #f ; see new-friend
-; > (multirember&co 'tuna `(and tuna) a-friend)
-; #f ; see latest-friend
-
+; > (multirember&co (quote tuna) `(strawberries tuna and swordfish) last-friend)
+; 3
