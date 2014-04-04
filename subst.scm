@@ -1,11 +1,7 @@
-(define subst
-  (lambda (new old l)
-    (cond
-      ((null? l) (quote ()))
-      ((eq? (car l) old)
-       (cons new (cdr l)))
-      (else (cons (car l)
-                  (subst new old (cdr l)))))))
+(load "./insert-g.scm")
+(load "./seqs.scm")
+
+(define subst (insert-g seqS))
 
 
 ; > (subst `topping `fudge `(ice cream with fudge for dessert))
