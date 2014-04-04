@@ -10,10 +10,12 @@
   (lambda (nexp)
     (cond
       ((atom? nexp) nexp)
-      ((eq? (operator nexp) (quote o+))
+      ((eq? (operator nexp)
+            (quote o+))
        (o+ (value (1st-sub-exp nexp))
            (value (2nd-sub-exp nexp))))
-      ((eq? (operator nexp) (quote omultiply))
+      ((eq? (operator nexp)
+            (quote omultiply))
        (omultiply (value (1st-sub-exp nexp))
                   (value (2nd-sub-exp nexp))))
       (else
