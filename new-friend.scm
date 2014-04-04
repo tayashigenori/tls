@@ -1,6 +1,10 @@
+(load "./a-friend.scm")
+
 (define new-friend
   (lambda (newlat seen)
-    (col newlat
+    (a-friend newlat
          (cons (quote tuna) seen))))
 
 
+; > (new-friend `() `())
+; #f
