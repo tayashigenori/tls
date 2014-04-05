@@ -2,6 +2,7 @@
 (load "./oeven.scm")
 (load "./o+.scm")
 (load "./omultiply.scm")
+(load "./the-last-friend.scm")
 
 (define evens-only*&co
   (lambda (l col)
@@ -30,4 +31,5 @@
                                                      (o+ as ds)))))))))) ; + car_sum cdr_sum
 
 
-; stub
+; > (evens-only*&co `((9 1 2 8) 3 10 ((9 9) 7 6) 2) the-last-friend)
+; (38 1920 (2 8) 10 (() 6) 2)
