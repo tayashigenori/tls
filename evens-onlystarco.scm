@@ -22,7 +22,12 @@
                                       p                    ; product: unchanged
                                       (o+ (car l) s))))))) ; sum: added
       (else (evens-only*&co (car l)
-                            ...)))))
+                            (lambda (al ap as) ; car_l car_product car_sum
+                              (evens-only*&co (cdr l)
+                                              (lambda (dl dp ds) ; cdr_l cdr_product cdr_sum
+                                                (col (cons al dl)        ; cons car_l cdr_l
+                                                     (omultiply ap dp)   ; * car_product cdr_product
+                                                     (o+ as ds)))))))))) ; + car_sum cdr_sum
 
 
 ; stub
