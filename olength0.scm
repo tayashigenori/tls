@@ -2,10 +2,12 @@
 (load "./eternity.scm")
 
 (define olength0 ; here define is not used in the Little Schemer
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else (add1 (eternity (cdr l))))))
+  ((lambda (length)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (add1 (length (cdr l)))))))
+   eternity)
   )
 
 ; > (olength0 `())
