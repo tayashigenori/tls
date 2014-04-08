@@ -1,17 +1,89 @@
 (load "./common/add1.scm")
 
-; see 2f41c0f08504600546b7a7279b9c8916d9d21df5
 (define olength
   ((lambda (mk-length)
      (mk-length mk-length))
    (lambda (mk-length)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else (add1
-                ((mk-length mk-length)
-                 (cdr l))))))))
+     ((lambda (length)
+        (lambda (l)
+          (cond
+            ((null? l) 0)
+            (else (add1 (length (cdr l)))))))
+      (mk-length mk-length))))
   )
 
-; > (olength `(hotdogs with mustard sauerkraut and pickles))
-; 6
+; doesn't work!!
+
+; to evaluate the following expression:
+;   ((lambda (mk-length)
+;      (mk-length mk-length))
+;    (lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length))))
+
+; we need to evaluate the following expression:
+;   ((lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length)))
+;    (lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length))))
+
+; which requires us to evaluate the following expression:
+;   ((lambda (length)
+;      (lambda (l)
+;        (cond
+;          ((null? l) 0)
+;          (else (add1 (length (cdr l)))))))
+;   ((lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length)))
+;    (lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length))))
+
+; which requires us to evaluate the following expression:
+;   ((lambda (length)
+;      (lambda (l)
+;        (cond
+;          ((null? l) 0)
+;          (else (add1 (length (cdr l)))))))
+;   ((lambda (length)
+;      (lambda (l)
+;        (cond
+;          ((null? l) 0)
+;          (else (add1 (length (cdr l)))))))
+;   ((lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length)))
+;    (lambda (mk-length)
+;      ((lambda (length)
+;         (lambda (l)
+;           (cond
+;             ((null? l) 0)
+;             (else (add1 (length (cdr l)))))))
+;       (mk-length mk-length))))
