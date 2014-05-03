@@ -112,7 +112,7 @@
 ; nothing
 
 ; > (value `nothing) ;; does not have value
-; reference to undefined identifier: *identifier
+; mcar: expects argument of type <mutable-pair>; given ()
 
 ; > (value `((lambda (nothing)
 ;              (cons nothing (quote ())))
@@ -161,3 +161,15 @@
 
 ; > (*quote `(quote quoted_text) `())
 ; quoted_text
+
+(define *identifier
+  (lambda (e table)
+    (lookup-in-table e table initial-table)))
+
+(define initial-table
+  (lambda (name)
+    (car (quote ()))))
+
+; > (*identifier `x `(((x y z) (1 2 3))
+;                     ((a b c) (4 5 6))))
+; 1
