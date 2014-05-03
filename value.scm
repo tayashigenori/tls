@@ -97,4 +97,18 @@
       ((eq? e (quote number?)) *const)
       (else *identifier))))
 
+(define list-to-action
+  (lambda (e)
+    (cond
+      ((atom? (car e))
+       (cond
+         ((eq? (car e) (quote quote))
+          *quote)
+         ((eq? (car e) (quote lambda))
+          *lambda)
+         ((eq? (car e) (quote cond))
+          *cond)
+         (else *application)))
+      (else *application))))
+
 ; expression-to-action doesn't work yet
