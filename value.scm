@@ -214,3 +214,11 @@
 ; > (*cond `(cond (coffee klatsch) (t party)) `(((coffee) (t))
 ;                                               ((klatsch party) (5 (6)))))
 ; 5
+
+(define evlis
+  (lambda (args table)
+    (cond
+      ((null? args) (quote ()))
+      (else
+       (cons (meaning (car args) table)
+             (evlis (cdr args) table))))))
