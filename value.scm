@@ -225,7 +225,7 @@
 
 (define *application
   (lambda (e table)
-    (apply
+    (oapply
      (meaning (function-of e) table)
      (evlis (arguments-of e) table))))
 
@@ -240,3 +240,14 @@
   (lambda (l)
     (eq? (first l) (quote non-primitive))))
 
+(define oapply
+  (lambda (fun vals)
+    (cond
+      ((primitive? fun)
+       (apply-primitive
+        (second fun) vals))
+      ((non-primitive? fun)
+       (apply-closure
+        (second fun) vals)))))
+
+; apply-primitive and apply-closure are yet to be defined
