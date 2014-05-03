@@ -99,8 +99,8 @@
 ; > (value `(car (quote (a b c)))) ;; expecting a
 ; reference to undefined identifier: *application
 
-; > (value `(quote (car (quote (a b c))))) ;; expecting (car quote (a b c)))
-; reference to undefined identifier: *quote
+; > (value `(quote (car (quote (a b c)))))
+; (car '(a b c))
 
 ; > (value `(add1 6)) ;; expecting 7
 ; reference to undefined identifier: *application
@@ -108,8 +108,8 @@
 ; > (value 6)
 ; 6
 
-; > (value `(quote nothing)) ;; expecting nothing
-; reference to undefined identifier: *quote
+; > (value `(quote nothing))
+; nothing
 
 ; > (value `nothing) ;; does not have value
 ; reference to undefined identifier: *identifier
@@ -152,3 +152,12 @@
 ; #f
 ; > (*const `car `())
 ; (primitive car)
+
+(define *quote
+  (lambda (e table)
+    (text-of e)))
+
+(define text-of second)
+
+; > (*quote `(quote quoted_text) `())
+; quoted_text
