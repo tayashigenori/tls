@@ -204,3 +204,13 @@
 
 (define question-of first)
 (define answer-of second)
+
+(define *cond
+  (lambda (e table)
+    (evcon (cond-lines-of e) table)))
+
+(define cond-lines-of cdr)
+
+; > (*cond `(cond (coffee klatsch) (t party)) `(((coffee) (t))
+;                                               ((klatsch party) (5 (6)))))
+; 5
