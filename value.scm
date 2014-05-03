@@ -232,3 +232,11 @@
 (define function-of car)
 (define arguments-of cdr)
 
+(define primitive?
+  (lambda (l)
+    (eq? (first l) (quote primitive))))
+
+(define non-primitive?
+  (lambda (l)
+    (eq? (first l) (quote non-primitive))))
+
