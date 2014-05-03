@@ -1,32 +1,7 @@
 (load "./common/atom.scm")
-(load "./1st-sub-exp.scm")
-(load "./2nd-sub-exp.scm")
-(load "./operator.scm")
-(load "./atom-to-function.scm")
-
 (load "./build.scm")
 (load "./first.scm")
 (load "./second.scm")
-
-(define value
-  (lambda (nexp)
-    (cond
-      ((atom? nexp) nexp)
-      (else
-       ((atom-to-function
-         (operator nexp))
-        (value (1st-sub-exp nexp))
-        (value (2nd-sub-exp nexp)))))))
-
-
-; > (value 13)
-; 13
-; > (value `(1 o+ 3))
-; 4
-; > (value `(1 o+ (3 oexpt 4)))
-; 82
-; > (value `(1 o+ (3 omultiply 4)))
-; 13
 
 (define new-entry build)
 
@@ -112,3 +87,50 @@
       (else *application))))
 
 ; expression-to-action doesn't work yet
+
+(define value
+  (lambda (e)
+    (meaning e (quote ()))))
+
+(define meaning
+  (lambda (e table)
+    ((expression-to-action e) e table)))
+
+; > (value `(car (quote (a b c)))) ;; expecting a
+; reference to undefined identifier: *application
+
+; > (value `(quote (car (quote (a b c))))) ;; expecting (car quote (a b c)))
+; reference to undefined identifier: *quote
+
+; > (value `(add1 6)) ;; expecting 7
+; reference to undefined identifier: *application
+
+; > (value 6) ;; expecting 6
+; reference to undefined identifier: *const
+
+; > (value `(quote nothing)) ;; expecting nothing
+; reference to undefined identifier: *quote
+
+; > (value `nothing) ;; does not have value
+; reference to undefined identifier: *identifier
+
+; > (value `((lambda (nothing)
+;              (cons nothing (quote ())))
+;            (quote
+;             (from nothing comes something))))
+;; expecting ((from nothing comes something))
+; reference to undefined identifier: *application
+
+; > (value `((lambda (nothing)
+;              (cond
+;                (nothing (quote something))
+;                (else (quote nothing))))
+;            #t))
+;; expecting something
+; reference to undefined identifier: *application
+
+; > (value #f) ;; expecting #f
+; reference to undefined identifier: *const
+
+; > (value `car) ;; expecting (primitive car)
+; reference to undefined identifier: *const
