@@ -105,8 +105,8 @@
 ; > (value `(add1 6)) ;; expecting 7
 ; reference to undefined identifier: *application
 
-; > (value 6) ;; expecting 6
-; reference to undefined identifier: *const
+; > (value 6)
+; 6
 
 ; > (value `(quote nothing)) ;; expecting nothing
 ; reference to undefined identifier: *quote
@@ -129,8 +129,26 @@
 ;; expecting something
 ; reference to undefined identifier: *application
 
-; > (value #f) ;; expecting #f
-; reference to undefined identifier: *const
+; > (value #f)
+; #f
 
-; > (value `car) ;; expecting (primitive car)
-; reference to undefined identifier: *const
+; > (value `car)
+; (primitive car)
+
+(define *const
+  (lambda (e table)
+    (cond
+      ((number? e) e)
+      ((eq? e #t) #t)
+      ((eq? e #f) #f)
+      (else (build (quote primitive) e)))))
+
+
+; > (*const 1 `())
+; 1
+; > (*const #t `())
+; #t
+; > (*const #f `())
+; #f
+; > (*const `car `())
+; (primitive car)
