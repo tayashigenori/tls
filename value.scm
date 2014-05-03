@@ -2,6 +2,7 @@
 (load "./build.scm")
 (load "./first.scm")
 (load "./second.scm")
+(load "./third.scm")
 
 (define new-entry build)
 
@@ -179,3 +180,6 @@
     (build (quote non-primitive)
            (cons table (cdr e)))))
 
+(define table-of first)
+(define formals-of second)
+(define body-of third)
