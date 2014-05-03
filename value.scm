@@ -173,3 +173,9 @@
 ; > (*identifier `x `(((x y z) (1 2 3))
 ;                     ((a b c) (4 5 6))))
 ; 1
+
+(define *lambda
+  (lambda (e table)
+    (build (quote non-primitive)
+           (cons table (cdr e)))))
+
