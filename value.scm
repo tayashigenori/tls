@@ -51,3 +51,6 @@
 
 ; > (lookup-in-entry `entree `((appetizer entree beverage) (food tastes good)) first) ; "first" not used
 ; tastes
+
+(define extend-table cons)
+
