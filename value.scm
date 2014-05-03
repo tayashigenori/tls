@@ -72,3 +72,29 @@
 ;                               (food tastes good)))
 ;                    first) ; "first" not used
 ; spaghetti
+
+(define expression-to-action
+  (lambda (e)
+    (cond
+      ((atom? e) (atom-to-action e))
+      (else (list-to-action e)))))
+
+(define atom-to-action
+  (lambda (e)
+    (cond
+      ((number? e) *const)
+      ((eq? e #t) *const)
+      ((eq? e #f) *const)
+      ((eq? e (quote cons)) *const)
+      ((eq? e (quote car)) *const)
+      ((eq? e (quote cdr)) *const)
+      ((eq? e (quote null?)) *const)
+      ((eq? e (quote eq?)) *const)
+      ((eq? e (quote atom?)) *const)
+      ((eq? e (quote zero?)) *const)
+      ((eq? e (quote add1?)) *const)
+      ((eq? e (quote sub1?)) *const)
+      ((eq? e (quote number?)) *const)
+      (else *identifier))))
+
+; expression-to-action doesn't work yet
