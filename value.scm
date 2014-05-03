@@ -1,4 +1,6 @@
 (load "./common/atom.scm")
+(load "./common/add1.scm")
+(load "./common/sub1.scm")
 (load "./build.scm")
 (load "./first.scm")
 (load "./second.scm")
@@ -250,4 +252,39 @@
        (apply-closure
         (second fun) vals)))))
 
-; apply-primitive and apply-closure are yet to be defined
+; apply-closure is yet to be defined
+
+(define apply-primitive
+  (lambda (name vals)
+    (cond
+      ((eq? name (quote cons))
+       (cons (first vals) (second vals)))
+      ((eq? name (quote car))
+       (car (first vals)))
+      ((eq? name (quote cdr))
+       (cdr (first vals)))
+      ((eq? name (quote null?))
+       (null? (first vals)))
+      ((eq? name (quote eq?))
+       (eq? (first vals) (second vals)))
+      ((eq? name (quote atom?))
+       (:atom? (first vals)))
+      ((eq? name (quote zero?))
+       (zero? (first vals)))
+      ((eq? name (quote add1))
+       (add1 (first vals)))
+      ((eq? name (quote sub1))
+       (sub1 (first vals)))
+      ((eq? name (quote number?))
+       (number? (first vals))))))
+
+(define :atom?
+  (lambda (x)
+    (cond
+      ((atom? x) #t)
+      ((null? x) #f)
+      ((eq? (car x) (quote primitive))
+       #t)
+      ((eq? (car x) (quote non-primitive))
+       #f)
+      (else #f))))
