@@ -1,13 +1,12 @@
 (define member?
   (lambda (a lat)
-    ((letrec
-         ((yes? (lambda (l)
-                  (cond
-                    ((null? l) #f)
-                    ((eq? (car l) a) #t)
-                    (else (yes? (cdr l)))))))
-       yes?)
-     lat)))
+    (letrec
+        ((yes? (lambda (l)
+                 (cond
+                   ((null? l) #f)
+                   ((eq? (car l) a) #t)
+                   (else (yes? (cdr l)))))))
+      (yes? lat))))
 
 ; (member? `liver `(bagels and lox))
 ; #f
