@@ -3,14 +3,14 @@
 (define union
   (lambda (set1 set2)
     (letrec
-        ((U (lambda (set)
+        ((A (lambda (set)
               (cond
                 ((null? set) set2)
                 ((member? (car set) set2)
-                 (U (cdr set)))
+                 (A (cdr set)))
                 (else (cons (car set)
-                            (U (cdr set))))))))
-      (U set1))))
+                            (A (cdr set))))))))
+      (A set1))))
 
 ; > (union `(stewed tomatoes and
 ;                   macaroni casserole)
