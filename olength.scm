@@ -2,17 +2,15 @@
 
 (define olength
   ((lambda (le)
-     ((lambda (mk-length)
-        (mk-length mk-length))
-      (lambda (mk-length)
-        (le (lambda (x)
-              ((mk-length mk-length) x))))))
+     ((lambda (f) (f f))
+      (lambda (f)
+        (le (lambda (x) ((f f) x))))))
    (lambda (length)
      (lambda (l)
        (cond
          ((null? l) 0)
-         (else (add1 (length (cdr l))))))))
-  )
+         (else
+          (add1 (olength (cdr l)))))))))
 
 ; > (olength `(hotdogs with mustard sauerkraut and pickles))
 ; 6
