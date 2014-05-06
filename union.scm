@@ -14,3 +14,5 @@
 ;                   macaroni casserole)
 ;          `(macaroni and cheese))
 ; (stewed tomatoes casserole macaroni and cheese)
+; > (union `(tomatoes and macaroni casserole) `(macaroni and cheese))
+; (tomatoes casserole macaroni and cheese)
