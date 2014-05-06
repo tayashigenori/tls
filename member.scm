@@ -1,16 +1,13 @@
 (define member?
-  (lambda (a lat)
-    (letrec
-        ((yes? (lambda (l)
-                 (cond
-                   ((null? l) #f)
-                   ((eq? (car l) a) #t)
-                   (else (yes? (cdr l)))))))
-      (yes? lat))))
+  (lambda (lat a)
+    (cond
+      ((null? lat) #f)
+      ((eq? (car lat) a) #t)
+      (else (member? (cdr lat) a)))))
 
-; (member? `liver `(bagels and lox))
+; > (member? `(bagels and lox) `liver)
 ; #f
-; > (member? `sardines `(Italian sardines spaghetti parsley))
+; > (member? `(Italian sardines spaghetti parsley) `sardines)
 ; #t
-; > (member? `ice `(salad greens with pears brie cheese frozen yogurt))
+; > (member? `(salad greens with pears brie cheese frozen yogurt) `ice)
 ; #f
