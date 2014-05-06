@@ -3,7 +3,7 @@
     (lambda (a lat)
       (cond
         ((null? lat) (quote ()))
-        ((test? a (car lat))
+        ((test? (car lat) a)
          ((multirember-f test?) a
                                 (cdr lat)))
         (else (cons (car lat)
