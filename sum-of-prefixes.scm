@@ -2,13 +2,13 @@
 
 (define sum-of-prefixes
   (lambda (tup)
-    (cond
-      ((null? tup) ...)
-      (else ...
-       (sum-of-prefixes (cdr tup))
-       ...))))
+    (sum-of-prefixes-b 0 tup)))
 
-; doesn't work yet
+
+; > (sum-of-prefixes `(2 1 9 17 0))
+; (2 3 12 29 29)
+; > (sum-of-prefixes `(1 1 1 1 1))
+; (1 2 3 4 5)
 
 (define sum-of-prefixes-b
   (lambda (sonssf tup) ; sum  of numbers seen so far
