@@ -9,11 +9,13 @@
                 (else (cons (car set)
                             (U (cdr set)))))))
          (M? (lambda (a lat)
-               (cond
-                 ((null? lat) #f)
-                 ((eq? (car lat) a) #t)
-                 (else
-                  (M? a (cdr lat)))))))
+               (letrec
+                   ((N? (lambda (lat)
+                          (cond
+                            ((null? lat) #f)
+                            ((eq? (car lat) a) #t)
+                            (else (N? (cdr lat)))))))
+                 (N? lat)))))
       (U set1))))
 
 ; > (union `(stewed tomatoes and
