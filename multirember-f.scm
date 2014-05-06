@@ -1,14 +1,16 @@
 (define multirember-f
   (lambda (test?)
-    (lambda (a lat)
-      (cond
-        ((null? lat) (quote ()))
-        ((test? (car lat) a)
-         ((multirember-f test?) a
-                                (cdr lat)))
-        (else (cons (car lat)
-                    ((multirember-f test?) a
-                                           (cdr lat))))))))
+    (letrec
+        ((m-f
+          (lambda (a lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((test? (car lat) a)
+               (m-f a (cdr lat)))
+              (else
+               (cons (car lat)
+                     (m-f a (cdr lat))))))))
+      m-f)))
 
 
 ; > ((multirember-f eq?) `tuna `(shrimp salad tuna salad and tuna))
