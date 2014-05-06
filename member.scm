@@ -7,3 +7,5 @@
 
 ; (member? `liver `(bagels and lox))
 ; #f
+; > (member? `sardines `(Italian sardines spaghetti parsley))
+; #t
