@@ -1,12 +1,12 @@
 (define two-in-a-row?
-  (lambda (lat)
-    (letrec
-        ((W (lambda (a lat)
-              (cond
-                ((null? lat) #f)
-                (else (or (eq? (car lat) a)
-                          (W (car lat)
-                             (cdr lat))))))))
+  (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              (else (or (eq? (car lat) a)
+                        (W (car lat)
+                           (cdr lat))))))))
+    (lambda (lat)
       (cond
         ((null? lat) #f)
         (else (W (car lat) (cdr lat)))))))
