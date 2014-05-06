@@ -2,10 +2,12 @@
   (lambda (a lat)
     (cond
       ((null? lat) #f)
-      (else (or (eq? (car lat) a)
-                (member? a (cdr lat)))))))
+      ((eq? (car lat) a) #t)
+      (else (member? a (cdr lat))))))
 
 ; (member? `liver `(bagels and lox))
 ; #f
 ; > (member? `sardines `(Italian sardines spaghetti parsley))
 ; #t
+; > (member? `ice `(salad greens with pears brie cheese frozen yogurt))
+; #f
