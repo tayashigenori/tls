@@ -3,8 +3,7 @@
     (cond
       ((null? lat) #f)
       (else
-       (or (is-first? (car lat) (cdr lat))
-           (two-in-a-row? (cdr lat)))))))
+       (is-first-b? (car lat) (cdr lat))))))
 
 ; > (two-in-a-row? `(Italian sardines spaghetti parsley))
 ; #f
@@ -18,3 +17,10 @@
     (cond
       ((null? lat) #f)
       (else (eq? (car lat) a)))))
+
+(define is-first-b?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) a)
+                (two-in-a-row? lat))))))
