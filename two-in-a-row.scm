@@ -24,3 +24,11 @@
       ((null? lat) #f)
       (else (or (eq? (car lat) a)
                 (two-in-a-row? lat))))))
+
+(define two-in-a-row-b?
+  (lambda (preceding lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) preceding)
+                (two-in-a-row-b? (car lat)
+                                 (cdr lat)))))))
