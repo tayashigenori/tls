@@ -1,16 +1,20 @@
-(load "./member.scm")
-
 (define union
   (lambda (set1 set2)
     (letrec
-        ((A (lambda (set)
+        ((U (lambda (set)
               (cond
                 ((null? set) set2)
                 ((member? (car set) set2)
-                 (A (cdr set)))
+                 (U (cdr set)))
                 (else (cons (car set)
-                            (A (cdr set))))))))
-      (A set1))))
+                            (U (cdr set)))))))
+         (member?
+          (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? (car lat) a) #t)
+              (else (member? a (cdr lat)))))))
+      (U set1))))
 
 ; > (union `(stewed tomatoes and
 ;                   macaroni casserole)
