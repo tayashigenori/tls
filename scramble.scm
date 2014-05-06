@@ -1,15 +1,15 @@
 (load "pick.scm")
 
 (define scramble
-  (lambda (tup)
-    (letrec
-        ((P (lambda (tup rp)
-              (cond
-                ((null? tup) (quote ()))
-                (else (cons (pick (car tup)
-                                  (cons (car tup) rp))
-                            (P (cdr tup)
-                               (cons (car tup) rp))))))))
+  (letrec
+      ((P (lambda (tup rp)
+            (cond
+              ((null? tup) (quote ()))
+              (else (cons (pick (car tup)
+                                (cons (car tup) rp))
+                          (P (cdr tup)
+                             (cons (car tup) rp))))))))
+    (lambda (tup)
       (P tup (quote ())))))
 
 
