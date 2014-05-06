@@ -1,15 +1,16 @@
+; see 2db4db77d688a09d7e507f69717f8c1174436727
+
 (define multirember
-  (lambda (a lat)
-    (letrec
-        ((mr (lambda (lat)
-               (cond
-                 ((null? lat) (quote ()))
-                 ((eq? a (car lat))
-                   (mr (cdr lat)))
-                 (else
-                   (cons (car lat)
-                         (mr (cdr lat))))))))
-      (mr lat))))
+  (letrec
+      ((mr (lambda (a lat)
+             (cond
+               ((null? lat) (quote ()))
+               ((eq? (car lat) a)
+                (mr a (cdr lat)))
+               (else
+                (cons (car lat)
+                      (mr a (cdr lat))))))))
+    mr))
 
 ; > (multirember `cup `(coffee cup tea cup and hick cup))
 ; (coffee tea and hick)
