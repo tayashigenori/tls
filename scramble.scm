@@ -1,19 +1,16 @@
 (load "pick.scm")
 
-(define scramble-b
-  (lambda (tup rev-pre) ; reversed prefix
-    (cond
-      ((null? tup) (quote ()))
-      (else
-       (cons (pick (car tup)
-                   (cons (car tup) rev-pre))
-             (scramble-b (cdr tup)
-                         (cons (car tup) rev-pre)))))))
-
-
 (define scramble
   (lambda (tup)
-    (scramble-b tup (quote ()))))
+    (letrec
+        ((P (lambda (tup rp)
+              (cond
+                ((null? tup) (quote ()))
+                (else (cons (pick (car tup)
+                                  (cons (car tup) rp))
+                            (P (cdr tup)
+                               (cons (car tup) rp))))))))
+      (P tup (quote ())))))
 
 
 ; > (scramble `(1 1 1 3 4 2 1 1 9 2))
