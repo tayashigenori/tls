@@ -2,8 +2,8 @@
   (lambda (lat)
     (cond
       ((null? lat) #f)
-      (else
-       (is-first-b? (car lat) (cdr lat))))))
+      (else (two-in-a-row-b? (car lat)
+                             (cdr lat))))))
 
 ; > (two-in-a-row? `(Italian sardines spaghetti parsley))
 ; #f
@@ -11,6 +11,8 @@
 ; #t
 ; > (two-in-a-row? `(Italian sardines more sardines spaghetti))
 ; #f
+; > (two-in-a-row? `(b d e i i a g))
+; #t
 
 (define is-first?
   (lambda (a lat)
