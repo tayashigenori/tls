@@ -4,16 +4,16 @@
         ((U (lambda (set)
               (cond
                 ((null? set) set2)
-                ((member? (car set) set2)
+                ((M? (car set) set2)
                  (U (cdr set)))
                 (else (cons (car set)
                             (U (cdr set)))))))
-         (member?
-          (lambda (a lat)
-            (cond
-              ((null? lat) #f)
-              ((eq? (car lat) a) #t)
-              (else (member? a (cdr lat)))))))
+         (M? (lambda (a lat)
+               (cond
+                 ((null? lat) #f)
+                 ((eq? (car lat) a) #t)
+                 (else
+                  (M? a (cdr lat)))))))
       (U set1))))
 
 ; > (union `(stewed tomatoes and
