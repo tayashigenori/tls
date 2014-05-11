@@ -3,6 +3,7 @@
 (define intersectall
   (lambda (lset)
     (cond
+      ((null? lset) (quote ()))
       ((null? (cdr lset)) (car lset))
       (else (intersect (car lset)
                        (intersectall (cdr lset)))))))
@@ -15,3 +16,7 @@
 ;                   (8 pears and 6 plums)
 ;                   (and 6 prunes with lots of apples)))
 ; (6 and)
+; > (intersectall `())
+; ()
+; > (intersectall `((a b c) ()))
+; ()
