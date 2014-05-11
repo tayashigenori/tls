@@ -3,17 +3,15 @@
 (define intersectall
   (lambda (lset)
     (letrec
-        ((intersectall
-          (lambda (lset)
-            (cond
-              ((null? (cdr lset))
-               (car lset))
-              (else (intersect (car lset)
-                               (intersectall
-                                (cdr lset))))))))
+        ((A (lambda (lset)
+              (cond
+                ((null? (cdr lset))
+                 (car lset))
+                (else (intersect (car lset)
+                                 (A (cdr lset))))))))
       (cond
         ((null? lset) (quote ()))
-        (else (intersectall lset))))))
+        (else (A lset))))))
 
 
 ; > (intersectall `((a b c) (c a d e) (e f g h a b)))
@@ -26,4 +24,17 @@
 ; > (intersectall `())
 ; ()
 ; > (intersectall `((a b c) ()))
+; ()
+; > (intersectall `((3 mangos and)
+;                   (3 kiwis and)
+;                   (3 hamburgers)))
+; (3)
+; > (intersectall `((3 steaks and)
+;                   (no food and)
+;                   (three baked potatoes)
+;                   (3 diet hamburgers)))
+; ()
+; > (intersectall `((3 mangos and)
+;                   ()
+;                   (3 diet hamburgers)))
 ; ()
