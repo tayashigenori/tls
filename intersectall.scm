@@ -1,11 +1,11 @@
 (load "./intersect.scm")
 
 (define intersectall
-  (lambda (l-set)
+  (lambda (lset)
     (cond
-      ((null? (cdr l-set)) (car l-set))
-      (else (intersect (car l-set)
-                       (intersectall (cdr l-set)))))))
+      ((null? (cdr lset)) (car lset))
+      (else (intersect (car lset)
+                       (intersectall (cdr lset)))))))
 
 
 ; > (intersectall `((a b c) (c a d e) (e f g h a b)))
