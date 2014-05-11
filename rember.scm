@@ -49,3 +49,43 @@
 ;                                           gingerbreadman chocolate
 ;                                           chip brownies))
 ; (cookies chocolate mints caramel delight ginger snaps)
+
+(define rember-upto-last
+  (lambda (a lat)
+    (call-with-current-continuation
+     (lambda (skip)
+       (letrec
+           ((R (lambda (lat)
+                 (cond
+                   ((null? lat) (quote ()))
+                   ((eq? (car lat) a)
+                    (skip (R (cdr lat))))
+                   (else (cons (car lat)
+                               (R (cdr lat))))))))
+         (R lat))))))
+
+; > (rember-upto-last `roots `(noodles
+;                              spaghetti spatzle bean-thread
+;                              roots
+;                              potatoes yam
+;                              others
+;                              rice))
+; (potatoes yam others rice)
+; > (rember-upto-last `sweetthing `(noodles
+;                                   spaghetti spatzle bean-thread
+;                                   roots
+;                                   potatoes yam
+;                                   others
+;                                   rice))
+; (noodles spaghetti spatzle bean-thread roots potatoes yam others rice)
+; > (rember-upto-last `cookies `(cookies
+;                                chocolate mints
+;                                caramel delight ginger snaps
+;                                desserts
+;                                chocolate mousse
+;                                vanilla ice cream
+;                                German chocolate cake
+;                                more cookies
+;                                gingerbreadman chocolate
+;                                chip brownies))
+; (gingerbreadman chocolate chip brownies)
