@@ -11,14 +11,17 @@
 (define intersect
   (lambda (set1 set2)
     (letrec
-        ((I (lambda (set)
+        ((I (lambda (set1)
               (cond
-                ((null? set) (quote ()))
-                ((member? (car set) set2)
-                 (cons (car set)
-                       (I (cdr set))))
-                (else (I (cdr set)))))))
-      (I set1))))
+                ((null? set1) (quote ()))
+                ((member? (car set1)
+                          set2)
+                 (cons (car set1)
+                       (I (cdr set1))))
+                (else (I (cdr set1)))))))
+      (cond
+        ((null? set2) (quote ()))
+        (else (I set1))))))
 
 ; > (intersect? `(stewed tomatoes and macaroni) `(macaroni and cheese))
 ; #t
