@@ -1,10 +1,13 @@
-(load "./insert-g.scm")
-(load "./seqrem.scm")
-
 (define rember
-  (lambda (a l)
-    ((insert-g seqrem) #f a l)))
-
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (lat)
+              (cond
+                ((null? lat) (quote ()))
+                ((eq? (car lat) a) (cdr lat))
+                (else (cons (car lat)
+                            (R (cdr lat))))))))
+      (R lat))))
 
 ; > (rember `sausage `(pizza with sausage and bacon))
 ; (pizza with and bacon)
