@@ -2,11 +2,18 @@
 
 (define intersectall
   (lambda (lset)
-    (cond
-      ((null? lset) (quote ()))
-      ((null? (cdr lset)) (car lset))
-      (else (intersect (car lset)
-                       (intersectall (cdr lset)))))))
+    (letrec
+        ((intersectall
+          (lambda (lset)
+            (cond
+              ((null? (cdr lset))
+               (car lset))
+              (else (intersect (car lset)
+                               (intersectall
+                                (cdr lset))))))))
+      (cond
+        ((null? lset) (quote ()))
+        (else (intersectall lset))))))
 
 
 ; > (intersectall `((a b c) (c a d e) (e f g h a b)))
