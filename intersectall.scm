@@ -26,7 +26,7 @@
                              ;            (J (cdr s1))))))))
                              (else (J (cdr s1)))))))
                    (cond
-                     ((null? s2) (quote ()))
+                     ((null? s2) (hop (quote ())))
                      (else (J s1)))))))
          (cond
            ((null? lset) (quote ()))
