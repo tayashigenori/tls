@@ -2,17 +2,23 @@
 
 (define intersectall
   (lambda (lset)
-    (letrec
-        ((A (lambda (lset)
-              (cond
-                ((null? (cdr lset))
-                 (car lset))
-                (else (intersect (car lset)
-                                 (A (cdr lset))))))))
-      (cond
-        ((null? lset) (quote ()))
-        (else (A lset))))))
+    (letcc hop
+      (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset))
+                   (hop (quote ())))
+                  ((null? (cdr lset))
+                   (car lset))
+                  (else
+                   (intersect (car lset)
+                              (A (cdr lset))))))))
+        (cond
+          ((null? lset) (quote ()))
+          (else (A lset)))))))
 
+
+; causes an error: "reference to undefined identifier: letcc"
 
 ; > (intersectall `((a b c) (c a d e) (e f g h a b)))
 ; (a)
